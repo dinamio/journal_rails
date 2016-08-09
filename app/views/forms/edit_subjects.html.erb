@@ -1,6 +1,6 @@
 <h1 class="page-header">Предметы <%= @form.name%></h1>
 <div class="row">
-	<%= form_for(@form, url: update_subjects_form_path(@form), html: {method: "patch"}) do |f| %>
+	<%= form_for(@form, url: form_update_subjects_path(@form), html: {method: "patch"}) do |f| %>
 	<div class="col-lg-1"></div>
 	<div class="field col-lg-11">
   		<%= f.collection_check_boxes :subject_ids, Subject.all, :id, :name do |b| %>

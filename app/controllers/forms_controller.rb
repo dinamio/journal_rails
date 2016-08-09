@@ -62,11 +62,11 @@ class FormsController < ApplicationController
   end
 
   def edit_subjects
-    set_form
+    @form = Form.find(params[:form_id])
   end
 
   def save_subjects
-    set_form
+    @form = Form.find(params[:form_id])
     subjects = params[:form][:subject_ids]
     @form.subjects.clear
     subjects.each do |subject_id|

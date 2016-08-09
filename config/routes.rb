@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
+  get 'journal/index'
+
   resources :subjects
-  resources :forms
+  get '/journal' => 'journal#index', as: :journal
+  get '/journal_details' => 'journal#details', as: :journal_details
+  resources :forms do
+    resources :pupils
+    get '/subjects' => 'forms#edit_subjects', as: :edit_subjects
+    patch 'subjects' => 'forms#save_subjects', as: :update_subjects
+  end
   get 'welcome/index'
-  get 'form/:id/subjects' => 'forms#edit_subjects', as: :edit_subjects_form
-  patch 'form/:id/subjects' => 'forms#save_subjects', as: :update_subjects_form
+  
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.
