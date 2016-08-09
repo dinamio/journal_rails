@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
+  resources :subjects
   resources :forms
   get 'welcome/index'
+  get 'form/:id/subjects' => 'forms#edit_subjects', as: :edit_subjects_form
 
   devise_for :users
   # The priority is based upon order of creation: first created -> highest priority.

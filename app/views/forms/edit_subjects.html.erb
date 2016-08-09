@@ -1,0 +1,15 @@
+<h1 class="page-header">Предметы <%= @form.name%></h1>
+<div class="row">
+	<%= form_for(@form) do |f| %>
+	<div class="field">
+	<%= f.select(:subjects, Subject.all.collect {|p| [ p.name, p.id ] }, 
+                                           { :prompt => "Please select"}, 
+                                           { :multiple => true, :size => 5 }) %>
+	</div>
+	<div class="actions">
+    	<%= f.submit 'Отправить', :class => "btn" %>
+  	</div>                                           
+
+	<%end%>
+
+</div>

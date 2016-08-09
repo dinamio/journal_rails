@@ -1,27 +1,31 @@
-<p id="notice"><%= notice %></p>
+<%if notice !=nil %>
+<p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
 
-<h1>Listing Forms</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @forms.each do |form| %>
+<h1 class="page-header"><%=t('forms')%></h1>
+<div class="table-responsive">
+  <table class="table table-bordered table-hover table-striped">
+    <thead>
       <tr>
-        <td><%= form.name %></td>
-        <td><%= link_to 'Show', form %></td>
-        <td><%= link_to 'Edit', edit_form_path(form) %></td>
-        <td><%= link_to 'Destroy', form, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <th>Название</th>
+        <th colspan="4"></th>
       </tr>
-    <% end %>
-  </tbody>
-</table>
+    </thead>
+
+    <tbody>
+      <% @forms.each do |form| %>
+        <tr>
+          <td><%= form.name %></td>
+          <td><%= link_to 'Открыть', form %></td>
+          <td><%= link_to 'Редактировать', edit_form_path(form) %></td>
+          <td><%= link_to 'Удалить', form, method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+          <td><%= link_to 'Предметы', edit_subjects_form_path(form)%></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
 
 <br>
 
-<%= link_to 'New Form', new_form_path %>
+<%= link_to 'Добавить класс', new_form_path %>

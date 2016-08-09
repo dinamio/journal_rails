@@ -11,6 +11,8 @@
  * file per style scope.
  *
  *= require bootstrap.min
+ *= require font-awesome
+ *= require sb-admin
  *= require_tree .
  *= require_self
  */
