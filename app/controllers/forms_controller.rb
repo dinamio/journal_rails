@@ -65,6 +65,28 @@ class FormsController < ApplicationController
     set_form
   end
 
+  def save_subjects
+    set_form
+    subjects = params[:form][:subject_ids]
+    @form.subjects.clear
+    subjects.each do |subject_id|
+      if (subject_id != '')
+        subject = Subject.find(subject_id)
+        @form.subjects.push(subject)
+        puts subject  
+      end
+    end
+    respond_to do |format|
+      if @form.save
+        format.html { redirect_to forms_path, notice: 'Предметы класса успешно обновлены.' }
+        format.json { render :show, status: :created, location: @form }
+      else
+        format.html { render :new }
+        format.json { render json: @form.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_form

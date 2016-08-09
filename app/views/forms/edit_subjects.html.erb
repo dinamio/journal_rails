@@ -1,13 +1,17 @@
 <h1 class="page-header">Предметы <%= @form.name%></h1>
 <div class="row">
-	<%= form_for(@form) do |f| %>
-	<div class="field">
-	<%= f.select(:subjects, Subject.all.collect {|p| [ p.name, p.id ] }, 
-                                           { :prompt => "Please select"}, 
-                                           { :multiple => true, :size => 5 }) %>
+	<%= form_for(@form, url: update_subjects_form_path(@form), html: {method: "patch"}) do |f| %>
+	<div class="col-lg-1"></div>
+	<div class="field col-lg-11">
+  		<%= f.collection_check_boxes :subject_ids, Subject.all, :id, :name do |b| %>
+    	<div class="collection-check-box">
+      		<%= b.check_box %>
+      		<%= b.label %>
+    	</div>
+  	<% end %>
 	</div>
 	<div class="actions">
-    	<%= f.submit 'Отправить', :class => "btn" %>
+    	<%= f.submit 'Сохранить', :action => "save_subjects", :class => "btn" %>
   	</div>                                           
 
 	<%end%>
