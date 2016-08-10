@@ -21,6 +21,8 @@ class PupilsController < ApplicationController
 
   # GET /pupils/1/edit
   def edit
+    @form = Form.find(params[:form_id])
+    @pupil = Pupil.find(params[:id])
   end
 
   # POST /pupils
@@ -31,7 +33,7 @@ class PupilsController < ApplicationController
     @pupil.form = @form
     respond_to do |format|
       if @pupil.save
-        format.html { redirect_to form_pupils_path(@form), notice: 'Pupil was successfully created.' }
+        format.html { redirect_to form_pupils_path(@form), notice: 'Ученик успешно добавлен.' }
         format.json { render :show, status: :created, location: @pupil }
       else
         format.html { render :new }
@@ -43,9 +45,10 @@ class PupilsController < ApplicationController
   # PATCH/PUT /pupils/1
   # PATCH/PUT /pupils/1.json
   def update
+    @form = Form.find(params[:form_id])
     respond_to do |format|
       if @pupil.update(pupil_params)
-        format.html { redirect_to @pupil, notice: 'Pupil was successfully updated.' }
+        format.html { redirect_to form_pupils_path(@form), notice: 'Данные ученика изменены.' }
         format.json { render :show, status: :ok, location: @pupil }
       else
         format.html { render :edit }
@@ -58,8 +61,9 @@ class PupilsController < ApplicationController
   # DELETE /pupils/1.json
   def destroy
     @pupil.destroy
+    @form = Form.find(params[:form_id])
     respond_to do |format|
-      format.html { redirect_to pupils_url, notice: 'Pupil was successfully destroyed.' }
+      format.html { redirect_to form_pupils_path(@form), notice: 'Ученик удален.' }
       format.json { head :no_content }
     end
   end

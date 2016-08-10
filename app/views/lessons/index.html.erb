@@ -1,0 +1,30 @@
+<%if notice !=nil %>
+<p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
+
+<h1>Список уроков</h1>
+
+<table class="table table-bordered table-hover table-striped">
+  <thead>
+    <tr>
+      <th>Тема</th>
+      <th>Дата</th>
+      <th colspan="2"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @lessons.each do |lesson| %>
+      <tr>
+        <td><%= lesson.name %></td>
+        <td><%= lesson.date %></td>
+        <td><%= link_to 'Редактировать', edit_class_journal_lesson_path(@journal,lesson) %></td>
+        <td><%= link_to 'Удалить', [@journal,lesson], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'Добавить урок', new_class_journal_lesson_path(@journal) %>

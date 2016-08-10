@@ -1,3 +1,5 @@
 class Subject < ActiveRecord::Base
-	has_and_belongs_to_many :forms
+	has_many :class_journals, :dependent => :destroy
+	has_many :forms, through: :class_journals
+	
 end

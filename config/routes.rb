@@ -1,9 +1,14 @@
 Rails.application.routes.draw do
-  get 'journal/index'
+  
+  #get 'journal/index'
 
   resources :subjects
-  get '/journal' => 'journal#index', as: :journal
-  get '/journal_details' => 'journal#details', as: :journal_details
+  resources :class_journal do
+    resources :lessons
+  end
+
+  #get '/journal' => 'journal#index', as: :journal
+  #get '/journal_details' => 'journal#details', as: :journal_details
   resources :forms do
     resources :pupils
     get '/subjects' => 'forms#edit_subjects', as: :edit_subjects

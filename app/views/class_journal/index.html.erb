@@ -4,12 +4,12 @@
 	<div class="panel panel-primary text-center" >
 		<div class="panel-heading">
 			<div class="row">
-				<div class="huge"> <%=journal[0]%></div>
-				<div> <%=journal[1]%></div>
+				<div class="huge"> <%=journal.form.name%></div>
+				<div> <%=journal.subject.name%></div>
 			</div>
 		</div>
 		<div class="panel-footer">
-			 <%= link_to 'Детали', journal_details_path %>
+			 <%= link_to 'Детали', class_journal_path(journal) %>
 		</div>
 	</div>
 </div>

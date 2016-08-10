@@ -5,6 +5,10 @@ class FormsController < ApplicationController
   # GET /forms.json
   def index
     @forms = Form.all
+    respond_to do |format|
+        format.html
+        format.js
+    end
   end
 
   # GET /forms/1
@@ -42,7 +46,7 @@ class FormsController < ApplicationController
   def update
     respond_to do |format|
       if @form.update(form_params)
-        format.html { redirect_to @form, notice: 'Класс успешно обновлен.' }
+        format.html { redirect_to forms_path, notice: 'Класс успешно обновлен.' }
         format.json { render :show, status: :ok, location: @form }
       else
         format.html { render :edit }

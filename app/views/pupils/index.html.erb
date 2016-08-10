@@ -1,17 +1,20 @@
-<p id="notice"><%= notice %></p>
+<%if notice !=nil %>
+<p id="notice" class="alert alert-success"><%= notice %></p>
+<% end %>
 
-<h1 class="page-header">Listing Pupils</h1>
+<h1 class="page-header">Список учеников <%=@form.name%></h1>
 
 <div class="table-responsive">
 <table class="table table-bordered table-hover table-striped">
   <thead>
     <tr>
       <th>
-        Name
+        Имя
       </th>
       <th>
-        Surname
+        Фамилия
       </th>
+      <th colspan="2" />
     </tr>
   </thead>
 
@@ -20,6 +23,8 @@
       <tr>
         <td><%=pupil.name%></td>
         <td><%=pupil.surname%></td>
+        <td><%= link_to 'Редактировать', edit_form_pupil_path(@form,pupil) %></td>
+        <td><%= link_to 'Удалить', [@form,pupil], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>
     <% end %>
   </tbody>
@@ -27,4 +32,4 @@
 
 </div>
 
-<%= link_to 'New Pupil', new_form_pupil_path %>
+<%= link_to 'Добавить ученика', new_form_pupil_path %>

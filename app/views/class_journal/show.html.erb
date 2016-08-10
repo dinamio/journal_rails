@@ -1,0 +1,26 @@
+<h1 class="page-header"><%=@journal.form.name%> <%=@journal.subject.name%></h1>
+<table id="example" class="display" border="1" cellspacing="5" width="20%">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <%@lessons.each do |lesson|%>
+                <th><%=lesson.name%>
+                <%end%>
+            </tr>
+        </thead>
+        <tbody>
+        	<%@pupils.each do |pupil|%>
+        	<tr>
+        		<th/>
+        		<th><%=pupil.name%></th>
+        		<th><%=pupil.surname%></th>
+                <%@lessons.each do |lesson|%>
+                <th><%=lesson.marks.where(pupil: pupil).first != nil ? lesson.marks.where(pupil: pupil).first.mark : ''%></th>
+                <%end%>
+        	</tr>
+        	<%end%>
+        </tbody>
+    </table>
+<%= link_to 'Уроки', class_journal_lessons_path(@journal) %>    

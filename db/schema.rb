@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160809142154) do
+ActiveRecord::Schema.define(version: 20160810152327) do
+
+  create_table "class_journals", force: :cascade do |t|
+    t.integer  "form_id"
+    t.integer  "subject_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "class_journals", ["form_id"], name: "index_class_journals_on_form_id"
+  add_index "class_journals", ["subject_id"], name: "index_class_journals_on_subject_id"
 
   create_table "forms", force: :cascade do |t|
     t.string   "name"
@@ -19,10 +29,26 @@ ActiveRecord::Schema.define(version: 20160809142154) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "forms_subjects", id: false, force: :cascade do |t|
-    t.integer "form_id",    null: false
-    t.integer "subject_id", null: false
+  create_table "lessons", force: :cascade do |t|
+    t.string   "name"
+    t.date     "date"
+    t.integer  "class_journal_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
   end
+
+  add_index "lessons", ["class_journal_id"], name: "index_lessons_on_class_journal_id"
+
+  create_table "marks", force: :cascade do |t|
+    t.string   "mark"
+    t.integer  "lesson_id"
+    t.integer  "pupil_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "marks", ["lesson_id"], name: "index_marks_on_lesson_id"
+  add_index "marks", ["pupil_id"], name: "index_marks_on_pupil_id"
 
   create_table "pupils", force: :cascade do |t|
     t.string   "name"

@@ -1,4 +1,4 @@
-<%= form_for([@form,@pupil]) do |f| %>
+<%= form_for [@form,@pupil] do |f| %>
   <% if @pupil.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@pupil.errors.count, "error") %> prohibited this pupil from being saved:</h2>
@@ -11,14 +11,14 @@
     </div>
   <% end %>
   <div class="field">
-    <%= f.label :name %><br>
+    <%= f.label :name, 'Имя' %><br>
     <%= f.text_field :name %>
   </div>
   <div class="field">
-    <%= f.label :surname %><br>
+    <%= f.label :surname, 'Фамилия' %><br>
     <%= f.text_field :surname %>
   </div>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit 'Подтвердить', :class => "btn" %>
   </div>
 <% end %>

@@ -3,3 +3,10 @@ ru:
   enter: "Вход"
   app_name: "Журнал"
   forms: "Классы"
+  date: #Throws an exception otherwise.
+    month_names: [~, Январь, Февраль, Март, Апрель, Май, Июнь, Июль, Август, Сентябрь, Октябрь, Ноябрь, Декабрь]
+    abbr_month_names: [~, Jan, Feb, Mar, Apr, May, Jun, Jul, Aug, Sep, Oct, Nov, Dec]
+    order:
+      - "year"
+      - "month"
+      - "day"
