@@ -14,6 +14,9 @@
  *= require font-awesome
  *= require sb-admin
  *= require_tree .
+ *= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
+ *= require dataTables/jquery.dataTables
+ *= require dataTables.editor
  *= require_self
  */
 

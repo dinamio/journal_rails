@@ -5,7 +5,10 @@ Rails.application.routes.draw do
   resources :subjects
   resources :class_journal do
     resources :lessons
+    get '/journal_details' => 'class_journal#journal_table', as: :table
+    post '/journal_details' => 'class_journal#journal_change', as: :table_change
   end
+
 
   #get '/journal' => 'journal#index', as: :journal
   #get '/journal_details' => 'journal#details', as: :journal_details

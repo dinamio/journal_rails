@@ -12,26 +12,11 @@
 //
 //= require jquery
 //= require jquery_ujs
+//= require dataTables/jquery.dataTables
+//= require dataTables/bootstrap/2/jquery.dataTables.bootstrap
+//= require dataTables/jquery.dataTables
+//= require dataTables.editor
 //= require bootstrap.min
 //= require turbolinks
 //= require_tree .
-
-$( document ).ready(function() {
-	$('#forms_link').click(function (event) {
-		//clean_class();
-  		$(this).addClass("active");
-  		event.preventDefault(); // Prevent link from following its href
-	});   
-	$('#subjects_link').click(function (event) {
-		debugger;
-		//clean_class();
-  		$(this).addClass("active");
-  		event.preventDefault(); // Prevent link from following its href
-	});
-	$('#journals_link').click(function (event) {
-		//clean_class();
-  		$(this).addClass("active");
-  		event.preventDefault(); // Prevent link from following its href
-	});
-});
 

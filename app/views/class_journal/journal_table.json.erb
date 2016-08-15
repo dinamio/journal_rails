@@ -1,0 +1,22 @@
+{ 
+ "data": [
+ <%@pupils.each_with_index do |pupil,pupil_index|%>
+    {
+      "DT_RowId": "row_<%=pupil.id%>",
+      "first_name": "<%=pupil.name%>",
+      "last_name": "<%=pupil.surname%>" <%=',' if @lessons.size != 0%>
+      <%@lessons.each_with_index do |lesson,lesson_index|%>
+      "lesson_<%=lesson.id%>": "<%=lesson.marks.where(pupil: pupil).last != nil ? lesson.marks.where(pupil: pupil).last.mark : ''%>"
+        <%if @lessons.size-1!=lesson_index%>
+          , 
+        <%end%>
+      <%end%>
+    } <%if @pupils.size-1!=pupil_index%>
+      ,
+    <%end%>
+<%end%> 
+],
+  "options": [],
+  "files": []
+
+}

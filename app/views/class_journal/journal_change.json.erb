@@ -1,0 +1,15 @@
+{ 
+ "data": [
+    {
+      "DT_RowId": "<%=@row_id%>",
+      "first_name": "<%=@pupil.name%>",
+      "last_name": "<%=@pupil.surname%>",
+      <%@lessons.each_with_index do |lesson,lesson_index|%>
+      "lesson_<%=lesson.id%>": "<%=lesson.marks.where(pupil: @pupil).last != nil ? lesson.marks.where(pupil: @pupil).last.mark : ''%>"
+        <%if @lessons.size-1!=lesson_index%>
+          , 
+        <%end%>
+      <%end%>
+    } 
+]
+}

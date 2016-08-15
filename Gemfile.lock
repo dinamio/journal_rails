@@ -1,3 +1,10 @@
+GIT
+  remote: git://github.com/mcallaway/jquery-datatables-editable-rails.git
+  revision: 60c65caa30e623de3db0379b4b5c8d3dd88d47bb
+  specs:
+    jquery-datatables-editable-rails (1.3)
+      jquery-datatables-rails
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -67,6 +74,11 @@ GEM
     jbuilder (2.6.0)
       activesupport (>= 3.0.0, < 5.1)
       multi_json (~> 1.2)
+    jquery-datatables-rails (3.4.0)
+      actionpack (>= 3.1)
+      jquery-rails
+      railties (>= 3.1)
+      sass-rails
     jquery-rails (4.1.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -165,6 +177,8 @@ DEPENDENCIES
   devise
   font-awesome-rails
   jbuilder (~> 2.0)
+  jquery-datatables-editable-rails!
+  jquery-datatables-rails (~> 3.4.0)
   jquery-rails
   rails (= 4.2.6)
   sass-rails (~> 5.0)
