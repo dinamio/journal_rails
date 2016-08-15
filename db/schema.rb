@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20160810152327) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "class_journals", force: :cascade do |t|
     t.integer  "form_id"
     t.integer  "subject_id"
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20160810152327) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "class_journals", ["form_id"], name: "index_class_journals_on_form_id"
-  add_index "class_journals", ["subject_id"], name: "index_class_journals_on_subject_id"
+  add_index "class_journals", ["form_id"], name: "index_class_journals_on_form_id", using: :btree
+  add_index "class_journals", ["subject_id"], name: "index_class_journals_on_subject_id", using: :btree
 
   create_table "forms", force: :cascade do |t|
     t.string   "name"
@@ -37,7 +40,7 @@ ActiveRecord::Schema.define(version: 20160810152327) do
     t.datetime "updated_at",       null: false
   end
 
-  add_index "lessons", ["class_journal_id"], name: "index_lessons_on_class_journal_id"
+  add_index "lessons", ["class_journal_id"], name: "index_lessons_on_class_journal_id", using: :btree
 
   create_table "marks", force: :cascade do |t|
     t.string   "mark"
@@ -47,8 +50,8 @@ ActiveRecord::Schema.define(version: 20160810152327) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "marks", ["lesson_id"], name: "index_marks_on_lesson_id"
-  add_index "marks", ["pupil_id"], name: "index_marks_on_pupil_id"
+  add_index "marks", ["lesson_id"], name: "index_marks_on_lesson_id", using: :btree
+  add_index "marks", ["pupil_id"], name: "index_marks_on_pupil_id", using: :btree
 
   create_table "pupils", force: :cascade do |t|
     t.string   "name"
@@ -58,7 +61,7 @@ ActiveRecord::Schema.define(version: 20160810152327) do
     t.datetime "updated_at", null: false
   end
 
-  add_index "pupils", ["form_id"], name: "index_pupils_on_form_id"
+  add_index "pupils", ["form_id"], name: "index_pupils_on_form_id", using: :btree
 
   create_table "subjects", force: :cascade do |t|
     t.string   "name"
@@ -81,7 +84,13 @@ ActiveRecord::Schema.define(version: 20160810152327) do
     t.datetime "updated_at",                          null: false
   end
 
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
+  add_foreign_key "class_journals", "forms"
+  add_foreign_key "class_journals", "subjects"
+  add_foreign_key "lessons", "class_journals"
+  add_foreign_key "marks", "lessons"
+  add_foreign_key "marks", "pupils"
+  add_foreign_key "pupils", "forms"
 end
