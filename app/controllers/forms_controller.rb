@@ -72,9 +72,9 @@ class FormsController < ApplicationController
   def save_subjects
     @form = Form.find(params[:form_id])
     subjects = params[:form][:subject_ids]
-    @form.subjects.clear
     subjects.each do |subject_id|
-      if (subject_id != '')
+      if (subject_id != '' && (@form.subjects.where(id: subject_id).first == nil))
+        
         subject = Subject.find(subject_id)
         @form.subjects.push(subject)
         puts subject  

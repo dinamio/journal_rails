@@ -12,6 +12,15 @@ class ClassJournalController < ApplicationController
     @lessons = @journal.lessons
   end
 
+  def destroy
+    @journal = ClassJournal.find(params[:id])
+    @journal.destroy
+    respond_to do |format|
+      format.html { redirect_to class_journal_url, notice: 'Журнал успешно удален.' }
+      format.json { head :no_content }
+    end
+  end
+
   def journal_table
     @journal = ClassJournal.find(params[:class_journal_id])
     @pupils = @journal.form.pupils
