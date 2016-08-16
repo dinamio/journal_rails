@@ -16,7 +16,7 @@ class ClassJournalController < ApplicationController
     @journal = ClassJournal.find(params[:id])
     @journal.destroy
     respond_to do |format|
-      format.html { redirect_to class_journal_index, notice: 'Журнал успешно удален.' }
+      format.html { redirect_to class_journal_index_path, notice: 'Журнал успешно удален.' }
       format.json { head :no_content }
     end
   end
