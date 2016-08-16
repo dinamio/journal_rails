@@ -8,7 +8,7 @@
                 <th>Фамилия</th>
                 <%@lessons.each do |lesson|%>
                 
-                <th><%=lesson.name%></th>
+                <th><%=lesson.date.strftime("%d/%m")%></th>
                 <%end%>
                 
             </tr>

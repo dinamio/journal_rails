@@ -5,7 +5,7 @@ class LessonsController < ApplicationController
   # GET /lessons.json
   def index
     @journal = ClassJournal.find(params[:class_journal_id])
-    @lessons = @journal.lessons
+    @lessons = @journal.lessons.order(:date)
 
   end
 
@@ -76,6 +76,6 @@ class LessonsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def lesson_params
-      params.require(:lesson).permit(:name, :date, :class_journal_id)
+      params.require(:lesson).permit(:name, :date, :class_journal_id, :homework)
     end
 end

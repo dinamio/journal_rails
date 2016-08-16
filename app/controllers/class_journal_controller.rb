@@ -9,7 +9,7 @@ class ClassJournalController < ApplicationController
   def show
   	@journal = ClassJournal.find(params[:id])
   	@pupils = @journal.form.pupils
-    @lessons = @journal.lessons
+    @lessons = @journal.lessons.order(:date)
   end
 
   def destroy
