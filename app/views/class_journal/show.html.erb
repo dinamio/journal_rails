@@ -3,11 +3,10 @@
 <table id="example" class="display" cellspacing="0" width="100%">
         <thead>
             <tr>
-                
-                <th>Имя</th>
+                <th>#</th>
                 <th>Фамилия</th>
+                <th>Имя</th>
                 <%@lessons.each do |lesson|%>
-                
                 <th><%=lesson.date.strftime("%d/%m")%></th>
                 <%end%>
                 
@@ -20,59 +19,27 @@
 
 
 <script type="text/javascript">
-    /*$( document ).ready(function() {
-    
-    var editor = new $.fn.dataTable.Editor( {
-        ajax: "/class_journal/3",
-        table: "#journal",
-        idSrc:  'first_name',
-        fields: [ {
-                label: "First name:",
-                name: "first_name"
-            }, {
-                label: "Last name:",
-                name: "last_name"
-            },
-        <%@lessons.each do |lesson|%>{ 
-            label: "<%=lesson.name%>",
-            name: "lesson_<%=lesson.id%>"      
-        } <%= ',' if lesson.id !=3%>
-        <%end%>
-        ]
-    } );
-
-    $('#journal').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        editor.bubble( this );
-    } );
-    $('#journal').DataTable({
-        paging: false,
-        searching: false,
-        info: false,
-        columns: [
-        { data: "first_name" },
-        { data: "last_name" },
-        <%@lessons.each do |lesson|%>
-        { data: "lesson_<%=lesson.id%>"} 
-            <%= ',' if lesson.id !=3%>
-        <%end%>
-    ]
-    });
-    
-});*/
 
 var editor; // use a global for the submit and return data rendering in the examples
  
 $(document).ready(function() {
+
+    if (!$('#example_wrapper').length > 0) {
     editor = new $.fn.dataTable.Editor( {
         ajax: "<%=class_journal_table_change_path(@journal)%>",
         table: "#example",
-        fields: [ {
-                label: "Имя",
-                name: "first_name"
-            }, {
+        fields: [
+            {
+                label: "#",
+                name: "number"
+            },
+            {
                 label: "Фамилия:",
                 name: "last_name"
-            },
+            }, {
+                label: "Имя",
+                name: "first_name"
+            }, 
         <%@lessons.each_with_index do |lesson,index|%>{ 
             label: "Оценка",
             name: "lesson_<%=lesson.id%>"      
@@ -83,34 +50,29 @@ $(document).ready(function() {
     } );
  
     // Activate the bubble editor on click of a table cell
-    $('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        if ($(this).index()>1) {
+    
+    
+        $('#example').DataTable( {
+            scrollY: 300,
+            paging: false,
+            info: false,    
+            searching: false,
+            ajax: "<%=class_journal_table_path(@journal)%>",
+            columns: [            
+                { data: "number" },
+                { data: "last_name" },
+                { data: "first_name" },
+                <%@lessons.each_with_index do |lesson,index|%>
+                { data: "lesson_<%=lesson.id%>"} 
+               <%=','if @lessons.size-1!=index%>
+                <%end%>
+        ]
+    } );
+}
+$('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
+        if ($(this).index()>2) {
             editor.inline( this );
         }
-    } );
- 
-    $('#example').DataTable( {
-        dom: "Bfrtip",
-        scrollY: 300,
-        paging: false,
-        info: false,
-        ajax: "<%=class_journal_table_path(@journal)%>",
-        columns: [
-            
-            { data: "first_name" },
-            { data: "last_name" },
-            <%@lessons.each_with_index do |lesson,index|%>
-            { data: "lesson_<%=lesson.id%>"} 
-            <%=','if @lessons.size-1!=index%>
-            <%end%>
-        ],
-
-        order: [ 1, 'asc' ],
-        buttons: [
-            { extend: "create", editor: editor },
-            { extend: "edit",   editor: editor },
-            { extend: "remove", editor: editor }
-        ]
     } );
 } );
 </script>

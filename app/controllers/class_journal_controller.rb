@@ -9,8 +9,9 @@ class ClassJournalController < ApplicationController
 
   def show
   	@journal = ClassJournal.find(params[:id])
-  	@pupils = @journal.form.pupils
+  	@pupils = @journal.form.pupils.order(:surname)
     @lessons = @journal.lessons.order(:date)
+    
   end
 
   def destroy
@@ -24,8 +25,9 @@ class ClassJournalController < ApplicationController
 
   def journal_table
     @journal = ClassJournal.find(params[:class_journal_id])
-    @pupils = @journal.form.pupils
+    @pupils = @journal.form.pupils.order(:surname)
     @lessons = @journal.lessons
+    Pupil.fill_pupils(@pupils)
   end
 
   def journal_change
@@ -34,7 +36,7 @@ class ClassJournalController < ApplicationController
     req = params[:data] 
     @row_id = req.keys[0]
     pupil_id = @row_id.split('_')[1]
-    @pupil = Pupil.find(pupil_id)
+    @pupil = Pupil.find_by_id(pupil_id)
     lesson_id = req[@row_id].keys[0].split('_')[1]
     lesson = Lesson.find(lesson_id)
     mark = Mark.new
@@ -43,4 +45,6 @@ class ClassJournalController < ApplicationController
     mark.mark = req[@row_id].values[0]
     mark.save
   end
+
+  
 end

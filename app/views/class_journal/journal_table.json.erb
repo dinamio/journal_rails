@@ -3,6 +3,7 @@
  <%@pupils.each_with_index do |pupil,pupil_index|%>
     {
       "DT_RowId": "row_<%=pupil.id%>",
+      "number": "<%=pupil.number%>",
       "first_name": "<%=pupil.name%>",
       "last_name": "<%=pupil.surname%>" <%=',' if @lessons.size != 0%>
       <%@lessons.each_with_index do |lesson,lesson_index|%>

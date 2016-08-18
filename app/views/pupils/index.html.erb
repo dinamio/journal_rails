@@ -9,10 +9,10 @@
   <thead>
     <tr>
       <th>
-        Имя
+        Фамилия
       </th>
       <th>
-        Фамилия
+        Имя
       </th>
       <th colspan="2" />
     </tr>
@@ -21,8 +21,8 @@
   <tbody>
     <% @pupils.each do |pupil| %>
       <tr>
-        <td><%=pupil.name%></td>
         <td><%=pupil.surname%></td>
+        <td><%=pupil.name%></td>
         <td><%= link_to 'Редактировать', edit_form_pupil_path(@form,pupil) %></td>
         <td><%= link_to 'Удалить', [@form,pupil], method: :delete, data: { confirm: 'Вы уверены?' } %></td>
       </tr>

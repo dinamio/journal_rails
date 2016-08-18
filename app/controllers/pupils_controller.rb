@@ -5,7 +5,7 @@ class PupilsController < ApplicationController
   # GET form/:form_id/pupils.json
   def index
     @form = Form.find(params[:form_id])
-    @pupils = @form.pupils
+    @pupils = @form.pupils.order(:surname)
   end
 
   # GET /pupils/1
