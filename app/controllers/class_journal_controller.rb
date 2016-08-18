@@ -1,4 +1,5 @@
 class ClassJournalController < ApplicationController
+  before_filter :authenticate_user!
   def index
   	@journals = ClassJournal.all
     respond_to do |format|

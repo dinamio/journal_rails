@@ -1,6 +1,6 @@
 class PupilsController < ApplicationController
   before_action :set_pupil, only: [:show, :edit, :update, :destroy]
-
+  before_filter :authenticate_user!
   # GET form/:form_id/pupils
   # GET form/:form_id/pupils.json
   def index
