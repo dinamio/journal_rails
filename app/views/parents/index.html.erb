@@ -1,0 +1,32 @@
+
+<h1>Оценки</h1>
+
+<%@journals.each do |journal|%>
+<%lessons = journal.lessons%>
+  <h2 class="page_header"><%=journal.subject.name%></h2>
+  <table class="table table-bordered table-responsive" >
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <%lessons.each do |lesson|%>
+                <th><%=lesson.date.strftime("%d/%m")%></th>
+                <%end%>                
+            </tr>
+        </thead>
+        <tbody>
+          <tr class="success">
+            <td><%=@pupil.surname%></td>
+            <td><%=@pupil.name%></td>
+            <%lessons.each do |lesson|%>
+              <td><%=lesson.marks.where(pupil: @pupil).last ? lesson.marks.where(pupil: @pupil).last.mark : ''%></td>
+            <%end%>
+            
+          </tr>
+        </tbody>
+</table>
+<%end%>
+
+
+<br>
+

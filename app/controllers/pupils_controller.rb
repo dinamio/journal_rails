@@ -1,6 +1,9 @@
 class PupilsController < ApplicationController
   before_action :set_pupil, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter do 
+    render :text => 'Not Found', :status => '404' unless current_user && current_user.admin?
+  end
   # GET form/:form_id/pupils
   # GET form/:form_id/pupils.json
   def index

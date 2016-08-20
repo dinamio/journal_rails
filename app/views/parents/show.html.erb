@@ -1,0 +1,44 @@
+<h1 class="page_header"><%=@subject.name%></h1>
+
+  <table class="table table-bordered table-responsive" >
+        <thead>
+            <tr>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <%@lessons.each do |lesson|%>
+                <th><%=lesson.date.strftime("%d/%m")%></th>
+                <%end%>                
+            </tr>
+        </thead>
+        <tbody>
+          <tr class="success">
+            <td><%=@pupil.surname%></td>
+            <td><%=@pupil.name%></td>
+            <%@lessons.each do |lesson|%>
+              <td><%=lesson.marks.where(pupil: @pupil).last ? lesson.marks.where(pupil: @pupil).last.mark : ''%></td>
+            <%end%>
+            
+          </tr>
+        </tbody>
+</table>
+<h2>Уроки</h2>
+<table class="table table-bordered table-responsive" >
+        <thead>
+            <tr>
+                <th>Тема</th>
+                <th>Дата</th>
+                <th>Д\З</th>
+            </tr>
+        </thead>
+        <tbody>
+        <%@lessons.each do |lesson|%>
+          <tr class="info">
+            <td><%=lesson.name%></td>
+            <td><%=lesson.date.strftime("%d/%m")%></td>
+            <td><%=lesson.homework%></td>
+          </tr>
+          <%end%>
+        </tbody>
+</table>
+
+

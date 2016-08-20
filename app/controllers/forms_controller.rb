@@ -1,6 +1,9 @@
 class FormsController < ApplicationController
   before_action :set_form, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter do 
+    render :text => 'Not Found', :status => '404' unless current_user && current_user.admin?
+  end
   # GET /forms
   # GET /forms.json
   def index

@@ -33,6 +33,7 @@ gem 'devise'
 gem "font-awesome-rails"
 gem 'jquery-datatables-rails', '~> 3.4.0'
 gem 'jquery-datatables-editable-rails', :git => 'git://github.com/mcallaway/jquery-datatables-editable-rails.git'
+gem 'russian', '~> 0.6.0'
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 

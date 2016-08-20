@@ -1,6 +1,9 @@
 class SubjectsController < ApplicationController
   before_action :set_subject, only: [:show, :edit, :update, :destroy]
   before_filter :authenticate_user!
+  before_filter do 
+    render :text => 'Not Found', :status => '404' unless current_user && current_user.admin?
+  end
   # GET /subjects
   # GET /subjects.json
   def index

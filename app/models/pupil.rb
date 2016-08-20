@@ -1,6 +1,8 @@
 class Pupil < ActiveRecord::Base
   belongs_to :form
 
+  belongs_to :user
+
   attr_accessor :number
 
   def self.fill_pupils(pupils)

@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
   
   #get 'journal/index'
-
+  get '/parents' => "parents#index", as: :parents
+  get '/parents/:subject_id' => "parents#show", as: :parents_subject
   resources :subjects
   resources :class_journal do
     resources :lessons
