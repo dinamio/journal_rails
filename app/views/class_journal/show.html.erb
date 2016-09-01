@@ -1,6 +1,6 @@
 <h1 class="page-header"><%=@journal.form.name%> <%=@journal.subject.name%></h1>
 
-<table id="example" class="display" cellspacing="0" width="100%">
+<table id="journal" class="table table-bordered" cellspacing="0" width="100%">
         <thead>
             <tr>
                 <th>#</th>
@@ -12,6 +12,18 @@
                 
             </tr>
         </thead>
+        <tbody>
+            <%@pupils.each do |pupil|%>
+                <tr>
+                  <td><%=pupil.number%></td>
+                  <td><%=pupil.surname%></td>
+                  <td><%=pupil.name%></td>  
+                  <%@lessons.each do |lesson|%>
+                    <td><a href="#" data-pk="<%=lesson.id.to_s+'_'+pupil.id.to_s%>"><%=get_pupil_mark(pupil,lesson)%></a></td>
+                <%end%>
+                </tr>
+            <%end%>
+        </tbody>
 </table>
 <%= link_to 'Уроки', class_journal_lessons_path(@journal) %>    
 
@@ -20,59 +32,13 @@
 
 <script type="text/javascript">
 
-var editor; // use a global for the submit and return data rendering in the examples
- 
 $(document).ready(function() {
-
-    if (!$('#example_wrapper').length > 0) {
-    editor = new $.fn.dataTable.Editor( {
-        ajax: "<%=class_journal_table_change_path(@journal)%>",
-        table: "#example",
-        fields: [
-            {
-                label: "#",
-                name: "number"
-            },
-            {
-                label: "Фамилия:",
-                name: "last_name"
-            }, {
-                label: "Имя",
-                name: "first_name"
-            }, 
-        <%@lessons.each_with_index do |lesson,index|%>{ 
-            label: "Оценка",
-            name: "lesson_<%=lesson.id%>"      
-        } <%=',' if @lessons.size-1!=index%>
-        <%end%>
-        ]
-
-    } );
- 
-    // Activate the bubble editor on click of a table cell
-    
-    
-        $('#example').DataTable( {
-            scrollY: 300,
-            paging: false,
-            info: false,    
-            searching: false,
-            ajax: "<%=class_journal_table_path(@journal)%>",
-            columns: [            
-                { data: "number" },
-                { data: "last_name" },
-                { data: "first_name" },
-                <%@lessons.each_with_index do |lesson,index|%>
-                { data: "lesson_<%=lesson.id%>"} 
-               <%=','if @lessons.size-1!=index%>
-                <%end%>
-        ]
-    } );
-}
-$('#example').on( 'click', 'tbody td:not(:first-child)', function (e) {
-        if ($(this).index()>2) {
-            editor.inline( this );
-        }
-    } );
+$('#journal a').editable({
+    type: 'text',
+    name: 'mark',
+    url: '<%=class_journal_table_change_path(@journal)%>',
+    title: 'Введите оценку',
+    emptytext: 'Нет оценки'
+});
 } );
 </script>
