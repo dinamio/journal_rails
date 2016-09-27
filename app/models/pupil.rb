@@ -3,6 +3,8 @@ class Pupil < ActiveRecord::Base
 
   belongs_to :user
 
+  has_many :marks, :dependent => :delete_all
+
   attr_accessor :number
 
   def self.fill_pupils(pupils)
